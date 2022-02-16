@@ -1,0 +1,43 @@
+﻿@model MovieViewModel
+
+@{
+    ViewData["Title"] = "Manage Movies";
+}
+
+<body>
+<div class="container">
+    <h3>List your suggested Covid-19 lockdown movies</h3>
+    <table class="table table-striped table-responsive-md btn-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Release Date</th>
+                <th>Genre</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var movie in Model.Movies)
+            {
+                <tr>
+                    <td>@movie.Title</td>
+                    <td>@movie.ReleaseDate</td>
+                    <td>@movie.Genre</td>
+                    <td>@movie.Price</td>
+                    <td>
+                        <a asp-controller="Movie" asp-action="edit" asp-route-id="@movie.Id" class="btn btn-primary  m-1">Edit</a>
+                        <a asp-controller="Movie" asp-action="delete" asp-route-id="@movie.Id" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete movie @movie.Title')">Delete</a>
+                    </td>
+                </tr>
+
+
+            }
+        </tbody>
+    </table>
+    <a asp-controller="Movie" asp-action="Create" class="btn btn-primary  m-1">Add Movie</a>
+</div>
+</body>
+
+@section Scripts{
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}
